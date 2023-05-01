@@ -7,6 +7,9 @@
 
 let x=0;
 let y=0;
+
+let bullets = [];
+
 function setup() {
   createCanvas(windowWidth/2.7, windowHeight);
   
@@ -15,10 +18,18 @@ function setup() {
 function draw() {
   background(220);
   guy();
+  updateBullet();
 }
 
 
 
+
+function updateBullet() {
+  for (let bullet of bullets) {
+    bullet.update();
+    bullet.draw();
+  }
+}
 
 function guy() {
   if (keyIsDown(LEFT_ARROW)){
@@ -38,5 +49,37 @@ function guy() {
     x+=3;
   }
   ellipse(x, y, 15);
+  if (keyIsDown(90)){
+  //shoot
+
+    bullets.push(new Bullet(10, x, y));
+
+    // bullet(5,5,x,y,10);
+    
+  }
 }
 
+// function bullet(l,w,bx,by,v){
+//   bx-=(w/2);
+//   by-=v;
+  
+//   rect(bx,by,w,l);
+// }
+
+//function bulletstore(l,w,bx,by,v){
+
+class Bullet {
+  constructor(speed, x, y) {
+    this.speed = speed;
+    this.x = x;
+    this.y = y;
+  }
+
+  update() {
+    this.y -= this.speed;
+  }
+
+  draw() {
+    circle(this.x, this.y, 15);
+  }
+}
