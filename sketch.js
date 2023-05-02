@@ -28,25 +28,27 @@ function updateBullet() {
   for (let bullet of bullets) {
     bullet.update();
     bullet.draw();
+    
   }
+  bullets = bullets.filter(Bgone);
 }
 
 function guy() {
   if (keyIsDown(LEFT_ARROW)){
     //left
-    x-=3;
+    x-=5;
   }
   if (keyIsDown(UP_ARROW)){
     //up
-    y-=3;
+    y-=5;
   }
   if (keyIsDown(DOWN_ARROW)){
     //down
-    y+=3;
+    y+=5;
   }
   if (keyIsDown(RIGHT_ARROW)){
     //right
-    x+=3;
+    x+=5;
   }
   ellipse(x, y, 15);
   if (keyIsDown(90)){
@@ -79,7 +81,18 @@ class Bullet {
     this.y -= this.speed;
   }
 
+
   draw() {
-    circle(this.x, this.y, 15);
+    circle(this.x, this.y, 5);
   }
+}
+
+function Bgone(group){
+  if (group.y > windowHeight || group.y < 0){
+    console.log("woah");
+    return false;
+  }
+
+
+  return true;
 }
