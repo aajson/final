@@ -7,6 +7,7 @@
 
 let x=0;
 let y=0;
+let hit=false;
 
 let bullets = [];
 
@@ -18,6 +19,7 @@ function setup() {
 function draw() {
   background(220);
   guy();
+  badguy();
   updateBullet();
 }
 
@@ -54,12 +56,17 @@ function guy() {
   if (keyIsDown(90)){
   //shoot
 
-    bullets.push(new Bullet(10, x, y));
+    bullets.push(new Bullet(10, x, y,"guy",5 ));
 
     // bullet(5,5,x,y,10);
     
   }
 }
+
+
+
+
+
 
 // function bullet(l,w,bx,by,v){
 //   bx-=(w/2);
@@ -71,19 +78,23 @@ function guy() {
 //function bulletstore(l,w,bx,by,v){
 
 class Bullet {
-  constructor(speed, x, y) {
+  constructor(speed, x, y,type,size) {
     this.speed = speed;
     this.x = x;
     this.y = y;
+    this.type = type;
+    this.size =size;
   }
 
   update() {
     this.y -= this.speed;
   }
 
+  draw(){
+    if ( this.type === "guy"){
+      circle(this.x, this.y, this.size);
+    }  
 
-  draw() {
-    circle(this.x, this.y, 5);
   }
 }
 
@@ -95,4 +106,14 @@ function Bgone(group){
 
 
   return true;
+}
+function badguy(){
+ 
+ 
+  ellipse(100,100,25);
+
+  hit = collideCircleCircle(100,100,25,);
+  stroke(hit ? color(red) : 0);
+  print("colliding?", hit);
+
 }
