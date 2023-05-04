@@ -21,8 +21,16 @@ function draw() {
   guy();
   badguy();
   updateBullet();
+  
 }
 
+
+// function updatecollide() {
+//   for (let  of object) {
+    
+//   } 
+
+// }
 
 
 
@@ -30,7 +38,8 @@ function updateBullet() {
   for (let bullet of bullets) {
     bullet.update();
     bullet.draw();
-    
+    hit = collideCircleCircle(100,100,25,bullet.x,bullet.y,bullet.size);
+    print("colliding?", hit);
   }
   bullets = bullets.filter(Bgone);
 }
@@ -107,13 +116,44 @@ function Bgone(group){
 
   return true;
 }
-function badguy(){
- 
- 
-  ellipse(100,100,25);
 
-  hit = collideCircleCircle(100,100,25,);
-  stroke(hit ? color(red) : 0);
-  print("colliding?", hit);
+class badguys{
+  constructor(size, Btype,Mtype,Htype,x,y){
+    this.size = size;
+    this.Btype = Btype;
+    this.Mtype = Mtype;
+    this.Htype = Htype;
+    this.x = x;
+    this.y = y;
+  }
+  draw(){
+
+
+  }
+
+
+
 
 }
+
+
+function badguy(){
+  let bx=100;
+  let by=100;
+  let br=25;
+ 
+  ellipse(bx,by,br);
+  //collider(bx,by,br);
+  
+}
+// function collider(bx,by,br){
+//   for (let bullet of bullets) {
+//     bullet.update();
+//     hit = collideCircleCircle(bx,by,br,bullet.x,bullet.y,bullet.size);
+    
+//     print("colliding?", hit);
+//   }
+// }  
+
+
+
