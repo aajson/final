@@ -8,18 +8,19 @@
 let x=0;
 let y=0;
 let hit=false;
-
+let badgu;
 let bullets = [];
 
 function setup() {
   createCanvas(windowWidth/2.7, windowHeight);
-  
+  badgu = new badguys(100,100,25);
 }
 
 function draw() {
   background(220);
   guy();
-  badguy();
+  //badguy();
+  badgu.draw();
   updateBullet();
   
 }
@@ -38,10 +39,12 @@ function updateBullet() {
   for (let bullet of bullets) {
     bullet.update();
     bullet.draw();
-    hit = collideCircleCircle(100,100,25,bullet.x,bullet.y,bullet.size);
-    print("colliding?", hit);
+    // hit = collideCircleCircle(100,100,25,bullet.x,bullet.y,bullet.size);
+    // print("colliding?", hit);
+    collider(bullet,badgu);
+    bullets = bullets.filter(Bgone);
   }
-  bullets = bullets.filter(Bgone);
+ 
 }
 
 function guy() {
@@ -87,16 +90,19 @@ function guy() {
 //function bulletstore(l,w,bx,by,v){
 
 class Bullet {
-  constructor(speed, x, y,type,size) {
+  constructor(speed, x, y,type,size,hit) {
     this.speed = speed;
     this.x = x;
     this.y = y;
     this.type = type;
     this.size =size;
+    this.hit = hit;
   }
 
   update() {
-    this.y -= this.speed;
+    if (this.type === "guy"){
+      this.y -= this.speed;
+    } 
   }
 
   draw(){
@@ -108,7 +114,7 @@ class Bullet {
 }
 
 function Bgone(group){
-  if (group.y > windowHeight || group.y < 0){
+  if (group.y > windowHeight || group.y < 0 || group.hit===true){
     console.log("woah");
     return false;
   }
@@ -118,23 +124,32 @@ function Bgone(group){
 }
 
 class badguys{
-  constructor(size, Btype,Mtype,Htype,x,y){
+  constructor(x,y, size, Btype,Mtype,Htype,fx,fy ){
     this.size = size;
     this.Btype = Btype;
     this.Mtype = Mtype;
     this.Htype = Htype;
     this.x = x;
     this.y = y;
+    this.fx =fx;
+    this.fy =fy;
+
   }
+
   draw(){
-
+    ellipse(this.x, this.y, this.size);  
 
   }
+  
+  update(){
+    if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
+      v
 
-
-
+    }
+  }
 
 }
+
 
 
 function badguy(){
@@ -144,16 +159,16 @@ function badguy(){
  
   ellipse(bx,by,br);
   //collider(bx,by,br);
-  
+} 
+
+
+function collider(group,group2){
+  hit= collideCircleCircle(group2.x,group2.y,group2.size,group.x,group.y,group.size);
+  group.hit =hit;
+  print("colliding?", hit);
+
+
 }
-// function collider(bx,by,br){
-//   for (let bullet of bullets) {
-//     bullet.update();
-//     hit = collideCircleCircle(bx,by,br,bullet.x,bullet.y,bullet.size);
-    
-//     print("colliding?", hit);
-//   }
-// }  
 
 
 
