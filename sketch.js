@@ -141,12 +141,12 @@ class badguys{
 
   }
   
-  update(){
-    if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
-      v
+  // update(){
+  //   if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
+  //     v
 
-    }
-  }
+  //   }
+  // }
 
 }
 
