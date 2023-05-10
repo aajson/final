@@ -143,7 +143,7 @@ class badguys{
   
   update(){
     if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
-      v
+      
 
     }
   }
@@ -152,13 +152,11 @@ class badguys{
 
 
 
-function badguy(){
-  let bx=100;
-  let by=100;
-  let br=25;
- 
-  ellipse(bx,by,br);
-  //collider(bx,by,br);
+function nextbadguy(actguy){
+  if (actguy.alive === false){
+    actguy == Badguys.shift();
+    
+  }
 } 
 
 
@@ -170,5 +168,5 @@ function collider(group,group2){
 
 }
 
-
+// 
 
