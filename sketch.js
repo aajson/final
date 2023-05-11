@@ -141,18 +141,12 @@ class badguys{
 
   }
   
-<<<<<<< HEAD
   update(){
     if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
-      
-=======
-  // update(){
-  //   if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
-  //     v
->>>>>>> 97f8d0cee775aa2888b51094f508c83e4f343bc3
+      v
 
-  //   }
-  // }
+    }
+  }
 
 }
 
