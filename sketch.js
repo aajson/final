@@ -92,8 +92,8 @@ function guy() {
 class Bullet {
   constructor(speed, x, y,type,size,hit) {
     this.speed = speed;
-    this.x = x;
-    this.y = y;
+    this.pos = createVector(x,y);
+    
     this.type = type;
     this.size =size;
     this.hit = hit;
@@ -101,13 +101,13 @@ class Bullet {
 
   update() {
     if (this.type === "guy"){
-      this.y -= this.speed;
+      this.pos.y -= this.speed;
     } 
   }
 
   draw(){
     if ( this.type === "guy"){
-      circle(this.x, this.y, this.size);
+      circle(this.pos.x, this.pos.y, this.size);
     }  
 
   }
@@ -129,8 +129,8 @@ class badguys{
     this.Btype = Btype;
     this.Mtype = Mtype;
     this.Htype = Htype;
-    this.x = x;
-    this.y = y;
+    this.pos = createVector(x,y);
+    
     this.fx =fx;
     this.fy =fy;
 
@@ -141,23 +141,23 @@ class badguys{
 
   }
   
-  update(){
-    if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
-      v
+  // update(){
+  //   if (this.Mtype === "strait" && this.x != this.fx || this.y != this.fy){
+      
 
-    }
-  }
+  //   }
+  // }
 
 }
 
 
 
-function nextbadguy(actguy){
-  if (actguy.alive === false){
-    actguy == Badguys.shift();
+// function nextbadguy(actguy){
+//   if (actguy.alive === false){
+//     actguy == Badguys.shift();
     
-  }
-} 
+//   }
+// } 
 
 
 function collider(group,group2){
