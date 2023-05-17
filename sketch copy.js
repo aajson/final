@@ -8,18 +8,24 @@
 let x = 100;
 let y = 100;
 let guys;
+let bulet1;
 function setup() {
   
-  createCanvas(windowWidth/2.7, windowHeight);
-  
+  createCanvas(windowWidth/2.2, windowHeight);
+  bulet1= new  Bullet(100,50,20,2,"weave");
   guys= new guy();
+  // frameCount();
 }
 
 function draw() {
   background(220);
   guys.move();
-  guys.display();
   guys.update();
+  guys.display();
+  
+  bulet1.update();
+  bulet1.draw();
+  
   // Bupdate(guys);
 }
 
@@ -83,7 +89,7 @@ class guy {
 
   }
   display() {
-    ellipse(this.pos.x, this.pos.y,15);
+    ellipse(this.pos.x, this.pos.y,12);
 
   }
   update() {
@@ -99,9 +105,9 @@ class guy {
 
 class Bullet {
   constructor(x, y, size,speed,type,) {
-    this.pos = createVector(x,y);
+    this.pos = createVector(x,y); //x, y, magnitude, direction
     this.speed = speed; 
-    this.type = type;
+    this.type = type; 
     this.size =size;
     //this.hit = hit;
   }
@@ -110,13 +116,24 @@ class Bullet {
     if (this.type === "guy"){
       this.pos.y -= this.speed;
     } 
-  }
+    if (this.type === "norm") {
+      this.pos.y += this.speed;      
+    }
+    if (this.type === "weave"){
+      this.pos.add(createVector((sin(frameCount/8)*4),this.speed));
+    }
+  }  
  
   draw(){
     if ( this.type === "guy"){
       ellipse(this.pos.x, this.pos.y, this.size);
     }  
-
+    if ( this.type === "norm"){
+      ellipse(this.pos.x, this.pos.y, this.size);
+    }
+    if ( this.type === "weave"){
+      ellipse(this.pos.x, this.pos.y, this.size);
+    }
   }
 
 }
