@@ -5,15 +5,19 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+
 let x = 100;
 let y = 100;
 let guys;
 let bulet1;
+let eny;
+let hit;
 function setup() {
   
   createCanvas(windowWidth/2.2, windowHeight);
-  bulet1= new  Bullet(100,50,20,2,"weave");
+  //bulet1= new  Bullet(100,50,20,2,"weave");
   guys= new guy();
+  eny= new Enemy(200,200,20);
   // frameCount();
 }
 
@@ -22,9 +26,9 @@ function draw() {
   guys.move();
   guys.update();
   guys.display();
-  
-  bulet1.update();
-  bulet1.draw();
+  eny.display();
+  // bulet1.update( eny );
+  // bulet1.draw();
   
   // Bupdate(guys);
 }
@@ -94,8 +98,11 @@ class guy {
   }
   update() {
     for (let bullet of this.bullets) {
-      bullet.update();
+      //console.log("huh");
+      bullet.update( eny );
       bullet.draw();
+
+      
       this.bullets = this.bullets.filter(Bgone);
     
     }    
@@ -112,7 +119,9 @@ class Bullet {
     //this.hit = hit;
   }
 
-  update() {
+  update( group ) {
+
+
     if (this.type === "guy"){
       this.pos.y -= this.speed;
     } 
@@ -122,6 +131,11 @@ class Bullet {
     if (this.type === "weave"){
       this.pos.add(createVector((sin(frameCount/8)*4),this.speed));
     }
+
+    console.log(group.pos.x, group.pos.y);
+    console.log(this.pos.x, this.pos.y);
+    hit = collideCircleCircle( group.pos.x ,group.pos.y,group.size,this.pos.x,this.pos.y, this.size);
+    print("colliding?", hit);
   }  
  
   draw(){
@@ -148,4 +162,37 @@ function Bgone(group){
   return true;
 }
 //|| group.hit===true
+
+// function enemyStatus(){
+//   // if (acten.alive === false){
+//   //   actEnemy =  
+//  // }
+//   ellipse(200,200,50);
   
+// }
+  
+class Enemy{
+  constructor(x, y, size, health, attackType, attackBuffer, bulletspeed){
+    this.pos = createVector(x, y);
+    this.size = size;
+    this.health = health;
+    this.attackType = attackType;
+    this.attackBuffer = attackBuffer;
+    this.bulletspeed = bulletspeed;
+    this.Alive = true;
+  }
+  display(){
+    ellipse(this.pos.x, this.pos.y, this.size);
+
+
+  }
+
+
+}
+function collider(group,group2){
+  hit= collideCircleCircle(group2.x,group2.y,group2.size,group.x,group.y,group.size);
+  group.hit =hit;
+  print("colliding?", hit);
+  return hit;
+
+}
