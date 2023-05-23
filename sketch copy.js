@@ -9,15 +9,22 @@
 let x = 100;
 let y = 100;
 let guys;
+let enemys;
 let bulet1;
-let eny;
+let acten;
 let hit;
+
 function setup() {
   
   createCanvas(windowWidth/2.2, windowHeight);
   //bulet1= new  Bullet(100,50,20,2,"weave");
-  guys= new guy();
-  eny= new Enemy(200,200,20);
+
+  // acten = enemys.shift();
+  enemys = [new Enemy(200,200,20,100), new Enemy(400,200,20,10)];
+  guys = new guy();
+  
+
+  console.log(acten);
   // frameCount();
 }
 
@@ -26,9 +33,14 @@ function draw() {
   guys.move();
   guys.update();
   guys.display();
-  eny.display();
+  // acten.display();
+  enemyStatus(acten);
   // bulet1.update( eny );
   // bulet1.draw();
+
+  if enemys.length < 6 {
+    enemys.push(new Enemy()asdsad);
+  }
   
   // Bupdate(guys);
 }
@@ -99,7 +111,7 @@ class guy {
   update() {
     for (let bullet of this.bullets) {
       //console.log("huh");
-      bullet.update( eny );
+      bullet.update( `ac`ten );
       bullet.draw();
 
       
@@ -111,11 +123,12 @@ class guy {
 } 
 
 class Bullet {
-  constructor(x, y, size,speed,type,) {
+  constructor(x, y, size,speed,type) {
     this.pos = createVector(x,y); //x, y, magnitude, direction
     this.speed = speed; 
     this.type = type; 
     this.size =size;
+    this.hit = hit;
     //this.hit = hit;
   }
 
@@ -129,13 +142,18 @@ class Bullet {
       this.pos.y += this.speed;      
     }
     if (this.type === "weave"){
-      this.pos.add(createVector((sin(frameCount/8)*4),this.speed));
+      this.pos.add(createVector( sin(frameCount/8)*4),this.speed);
     }
 
-    console.log(group.pos.x, group.pos.y);
-    console.log(this.pos.x, this.pos.y);
+    //console.log(group.pos.x, group.pos.y);
+    //console.log(this.pos.x, this.pos.y);
     hit = collideCircleCircle( group.pos.x ,group.pos.y,group.size,this.pos.x,this.pos.y, this.size);
-    print("colliding?", hit);
+    //print("colliding?", hit);
+    this.hit = hit;
+    if (hit=== true){
+      group.health = group.health -= 1;
+      console.log(group.health);
+    }
   }  
  
   draw(){
@@ -153,26 +171,35 @@ class Bullet {
 }
 
 function Bgone(group){
-  if (group.pos.y > windowHeight || group.pos.y < 0 ){
-    console.log("woah");
+  if (group.pos.y > windowHeight || group.pos.y < 0 || group.hit===true){
+    //console.log("woah");
     return false;
   }
 
 
   return true;
 }
-//|| group.hit===true
 
-// function enemyStatus(){
-//   // if (acten.alive === false){
-//   //   actEnemy =  
-//  // }
-//   ellipse(200,200,50);
+
+function enemyStatus(acten){
+  if (acten.alive === false){
+    acten = enemys.shift();
+      
+  }
+  if (acten.health === 0){
+    acten.alive = false;
+  }
   
-// }
+}
   
 class Enemy{
   constructor(x, y, size, health, attackType, attackBuffer, bulletspeed){
+
+    // if (x.type === Array) {
+    //   for (let val of x) {
+
+    //   }
+    // }
     this.pos = createVector(x, y);
     this.size = size;
     this.health = health;
@@ -187,12 +214,12 @@ class Enemy{
 
   }
 
-
 }
+
 function collider(group,group2){
   hit= collideCircleCircle(group2.x,group2.y,group2.size,group.x,group.y,group.size);
   group.hit =hit;
-  print("colliding?", hit);
+  //print("colliding?", hit);
   return hit;
 
 }
