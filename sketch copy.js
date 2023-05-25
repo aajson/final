@@ -13,6 +13,7 @@ let enemys;
 let bulet1;
 let acten;
 let hit;
+let xe=0;
 
 function setup() {
   
@@ -21,6 +22,7 @@ function setup() {
 
   // acten = enemys.shift();
   enemys = [new Enemy(200,200,20,100), new Enemy(400,200,20,10)];
+  
   guys = new guy();
   
 
@@ -33,14 +35,15 @@ function draw() {
   guys.move();
   guys.update();
   guys.display();
-  // acten.display();
-  enemyStatus(acten);
+  enemys[xe].display();
+  enemys[xe].update();
+  // enemyStatus(acten);
   // bulet1.update( eny );
   // bulet1.draw();
 
-  if enemys.length < 6 {
-    enemys.push(new Enemy()asdsad);
-  }
+  // if enemys.length < 6 {
+  //   enemys.push(new Enemy()asdsad);
+  // }
   
   // Bupdate(guys);
 }
@@ -111,7 +114,7 @@ class guy {
   update() {
     for (let bullet of this.bullets) {
       //console.log("huh");
-      bullet.update( `ac`ten );
+      bullet.update( enemys[xe] );
       bullet.draw();
 
       
@@ -181,19 +184,19 @@ function Bgone(group){
 }
 
 
-function enemyStatus(acten){
-  if (acten.alive === false){
-    acten = enemys.shift();
+// function enemyStatus(acten){
+//   if (acten.alive === false){
+//     acten = enemys.shift();
       
-  }
-  if (acten.health === 0){
-    acten.alive = false;
-  }
+//   }
+//   if (acten.health === 0){
+//     acten.alive = false;
+//   }
   
-}
+// }
   
 class Enemy{
-  constructor(x, y, size, health, attackType, attackBuffer, bulletspeed){
+  constructor(x, y, size, health, attackTypeM, attackBuffer, bulletspeed){
 
     // if (x.type === Array) {
     //   for (let val of x) {
@@ -203,7 +206,7 @@ class Enemy{
     this.pos = createVector(x, y);
     this.size = size;
     this.health = health;
-    this.attackType = attackType;
+    this.attackTypeM = attackTypeM;
     this.attackBuffer = attackBuffer;
     this.bulletspeed = bulletspeed;
     this.Alive = true;
@@ -213,7 +216,19 @@ class Enemy{
 
 
   }
-
+  update(){
+    if (this.health === 0){
+      this.Alive = false;
+    }
+    if (this.Alive === false){
+      // if (xe >= enemys.length){
+      //   print("done");
+      // }
+      // else if (xe < enemys.length){
+      xe+=1;
+      // }
+    }
+  }
 }
 
 function collider(group,group2){
