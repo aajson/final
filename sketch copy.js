@@ -14,6 +14,8 @@ let bulet1;
 let acten;
 let hit;
 let xe=0;
+let frames;
+let sframe;
 
 function setup() {
   
@@ -26,8 +28,8 @@ function setup() {
   guys = new guy();
   
 
-  console.log(acten);
-  // frameCount();
+  
+  frames = frameCount();
 }
 
 function draw() {
@@ -219,6 +221,7 @@ class Enemy{
   update(){
     if (this.health === 0){
       this.Alive = false;
+      sframe=frames;
     }
     if (this.Alive === false){
       // if (xe >= enemys.length){
@@ -228,6 +231,11 @@ class Enemy{
       xe+=1;
       // }
     }
+    // if (this.Alive === true){
+    //   if () {
+        
+    //   }
+    //}
   }
 }
 
