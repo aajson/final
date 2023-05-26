@@ -14,7 +14,7 @@ let bulet1;
 let acten;
 let hit;
 let xe=0;
-let frames;
+//let frames;
 let sframe;
 
 function setup() {
@@ -29,7 +29,7 @@ function setup() {
   
 
   
-  frames = frameCount();
+ // frames = frameCount();
 }
 
 function draw() {
@@ -221,7 +221,7 @@ class Enemy{
   update(){
     if (this.health === 0){
       this.Alive = false;
-      sframe=frames;
+      //sframe=frames;
     }
     if (this.Alive === false){
       // if (xe >= enemys.length){
@@ -232,10 +232,9 @@ class Enemy{
       // }
     }
     // if (this.Alive === true){
-    //   if () {
-        
+    //   if (mod(frames) ===  ){
     //   }
-    //}
+    // }
   }
 }
 
