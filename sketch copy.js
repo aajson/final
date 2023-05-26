@@ -8,11 +8,7 @@
 
 let x = 100;
 let y = 100;
-let guys;
-let enemys;
-let bulet1;
-let acten;
-let hit;
+let guys, enemys, bulet1, hit;
 let xe=0;
 //let frames;
 let sframe;
@@ -29,7 +25,7 @@ function setup() {
   
 
   
- // frames = frameCount();
+  frameCount;
 }
 
 function draw() {
@@ -100,13 +96,13 @@ class guy {
       //right
       this.pos.x+=this.speed;
     }
-    if (keyIsDown(90)){
+    if (keyIsDown(90)) {
       //shoot
-    
+      
       this.bullets.push(new Bullet( this.pos.x, this.pos.y, 5, 10,"guy"));
            
     }  
-
+    
 
   }
   display() {
