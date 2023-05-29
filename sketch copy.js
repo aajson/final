@@ -168,6 +168,9 @@ class Bullet {
     if ( this.type === "weave"){
       ellipse(this.pos.x, this.pos.y, this.size);
     }
+    
+
+    
   }
 
 }
@@ -216,6 +219,12 @@ class Enemy{
 
 
   }
+  buffer(){
+    
+    
+    this.bullets.push(new Bullet( this.pos.x, this.pos.y, 5, 20,"norm"));
+
+
   update(){
     
     if (this.health === 0){
@@ -253,4 +262,32 @@ function collider(group,group2){
   //print("colliding?", hit);
   return hit;
 
+}
+
+
+class Boss{
+  constructor() {
+    this.health=10000;
+    this.phase=1;
+    this.size=50;
+    this.alive= true;
+    
+    
+
+
+  }
+  display(){
+    ellipse(this.pos.x, this.pos.y, this.size);
+
+  }
+  update(){
+    if (phase===1){
+      
+    }
+    if (phase===2){
+
+    }
+    if (phase===3)
+  
+  }
 }
