@@ -167,6 +167,9 @@ class Bullet {
     if ( this.type === "weave"){
       ellipse(this.pos.x, this.pos.y, this.size);
     }
+    
+
+    
   }
 
 }
@@ -208,12 +211,17 @@ class Enemy{
     this.attackBuffer = attackBuffer;
     this.bulletspeed = bulletspeed;
     this.Alive = true;
+
   }
   display(){
     ellipse(this.pos.x, this.pos.y, this.size);
 
 
   }
+  
+
+  
+
   update(){
     if (this.health === 0){
       this.Alive = false;
@@ -240,4 +248,33 @@ function collider(group,group2){
   //print("colliding?", hit);
   return hit;
 
+}
+
+
+class Boss{
+  constructor() {
+    this.health=10000;
+    this.phase=1;
+    this.size=50;
+    this.pos= createVector(x, y);
+    this.alive= true;
+    
+    
+
+
+  }
+  display(){
+    ellipse(this.pos.x, this.pos.y, this.size);
+
+  }
+  update(){
+    if (phase===1){
+      
+    }
+    if (phase===2){
+
+    }
+    if (phase===3)
+  
+  }
 }
