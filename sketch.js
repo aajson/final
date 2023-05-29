@@ -44,7 +44,7 @@ function updateBullet() {
     collider(bullet,badgu);
     bullets = bullets.filter(Bgone);
   }
- 
+  
 }
 
 function guy() {

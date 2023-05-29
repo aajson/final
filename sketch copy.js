@@ -8,10 +8,11 @@
 
 let x = 100;
 let y = 100;
-let guys, enemys, bulet1, hit;
 let xe=0;
-//let frames;
-let sframe;
+let guys, enemys, bulet1, hit,frames,sframe;
+
+
+
 
 function setup() {
   
@@ -25,7 +26,7 @@ function setup() {
   
 
   
-  frameCount;
+  frames = frameCount; 
 }
 
 function draw() {
@@ -100,7 +101,7 @@ class guy {
       //shoot
       
       this.bullets.push(new Bullet( this.pos.x, this.pos.y, 5, 10,"guy"));
-           
+        
     }  
     
 
@@ -156,7 +157,7 @@ class Bullet {
       console.log(group.health);
     }
   }  
- 
+  
   draw(){
     if ( this.type === "guy"){
       ellipse(this.pos.x, this.pos.y, this.size);
@@ -208,6 +209,7 @@ class Enemy{
     this.attackBuffer = attackBuffer;
     this.bulletspeed = bulletspeed;
     this.Alive = true;
+    this.bullets = []
   }
   display(){
     ellipse(this.pos.x, this.pos.y, this.size);
@@ -215,22 +217,33 @@ class Enemy{
 
   }
   update(){
+    
     if (this.health === 0){
       this.Alive = false;
-      //sframe=frames;
+      sframe=frames;
     }
     if (this.Alive === false){
       // if (xe >= enemys.length){
       //   print("done");
       // }
-      // else if (xe < enemys.length){
-      xe+=1;
+      //else if (xe < enemys.length){
+        xe+=1;
       // }
     }
-    // if (this.Alive === true){
-    //   if (mod(frames) ===  ){
-    //   }
-    // }
+    if (this.Alive === true){
+      this.bullets.push(new Bullet( this.pos.x, this.pos.y, 5, 20,"norm"));
+      //for (let t=sframe; t%10 == frames%10; ){
+        for (let bullet of this.bullets) {
+          
+          bullet.update( guys );
+          bullet.draw();
+    
+          
+          this.bullets = this.bullets.filter(Bgone);
+        
+        }    
+      //}
+    }
   }
 }
 
