@@ -270,6 +270,7 @@ class Boss{
     this.health=10000;
     this.phase=1;
     this.size=50;
+    this.pos= createVector(x, y);
     this.alive= true;
     
     
