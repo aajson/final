@@ -223,6 +223,7 @@ class Enemy{
     
     
     this.bullets.push(new Bullet( this.pos.x, this.pos.y, 5, 20,"norm"));
+  }
 
 
   update(){
@@ -251,8 +252,8 @@ class Enemy{
           this.bullets = this.bullets.filter(Bgone);
         
         }    
-      //}
-    }
+      }
+  
   }
 }
 
@@ -265,30 +266,30 @@ function collider(group,group2){
 }
 
 
-class Boss{
-  constructor() {
-    this.health=10000;
-    this.phase=1;
-    this.size=50;
-    this.pos= createVector(x, y);
-    this.alive= true;
+// class Boss{
+//   constructor() {
+//     this.health=10000;
+//     this.phase=1;
+//     this.size=50;
+//     this.pos= createVector(x, y);
+//     this.alive= true;
     
     
 
 
-  }
-  display(){
-    ellipse(this.pos.x, this.pos.y, this.size);
+//   }
+//   display(){
+//     ellipse(this.pos.x, this.pos.y, this.size);
 
-  }
-  update(){
-    if (phase===1){
+//   }
+//   update(){
+//     if (phase===1){
       
-    }
-    if (phase===2){
+//     }
+//     if (phase===2){
 
-    }
-    if (phase===3)
+//     }
+//     if (phase===3)
   
-  }
-}
+//   }
+// }
